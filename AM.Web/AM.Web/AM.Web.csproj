@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\" />
+    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>

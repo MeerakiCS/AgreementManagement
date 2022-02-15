@@ -12,28 +12,34 @@
         <table class="table table-striped custom-table mb-0 " id="agreement-data-table">
             <thead>
                 <tr>
-                    <th class="text-center">Product </th>
-                    <th class="text-center">Product Number </th>
-                    <th class="text-center">Group</th>
-                    <th class="text-center">New Price</th>
-                    <th class="text-center">Action</th>
+                    <th>User</th>
+                    <th>Group</th>
+                    <th>Product Number </th>
+                    <th>Effective Date </th>
+                    <th>Expiration Date </th>
+                    <th>Product Price</th>
+                    <th>New Price</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td class="text-center">@(item.Product.ProductDescription)</td>
-                        <td class="text-center">@(item.Product.ProductNumber)</td>
-                        <td class="text-center">@(item.ProductGroup.GroupDescription)</td>
-                        <td class="text-center">@(item.NewPrice)</td>
-                        <td class="text-center">
-                            <div>
-                                <a title="Edit" class="link-color cursor-pointer text-primary" onclick="openAgreementModal(@item.Id)" data-toggle="modal" data-target="#agreementModal"><i class="fa fa-edit m-r-5"></i> </a>
-                                <a title="Delete" class="link-color cursor-pointer text-primary" onclick="DeleteAgreement(@item.Id)"><i class="fa fa-trash-o m-r-5"></i> </a>
-                            </div>
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="text-center">@(item.User.IsNotNullOrEmpty() ? item.User.FullName:"-")</td>
+                    <td class="text-center cursor-pointer" data-toggle="tooltip" title="@item.ProductGroup.GroupDescription">@item.ProductGroup.GroupCode</td>
+                    <td class="text-center cursor-pointer" data-toggle="tooltip" title="@item.Product.ProductDescription" >@item.Product.ProductNumber </td>
+                    <td class="text-center">@item.EffectiveDate.ToString("MM-dd-yyyy")</td>
+                    <td class="text-center">@item.ExpirationDate.ToString("MM-dd-yyyy")</td>
+                    <td class="text-center">@item.ProductPrice</td>
+                    <td class="text-center">@item.NewPrice</td>
+                    <td class="">
+                        <div>
+                            <a title="Edit" class="link-color" onclick="openAgreementModal(@item.Id)" href="#" data-toggle="modal" data-target="#agreementModal"><i class="fa fa-edit m-r-5"></i> </a>
+                            <a title="Delete" class="link-color" style="cursor:pointer" href="#" onclick="DeleteAgreement(@item.Id)"><i class="fa fa-trash-o m-r-5"></i> </a>
+                        </div>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
