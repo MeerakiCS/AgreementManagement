@@ -11,13 +11,11 @@ function dataTableAgreements() {
         lengthChange: true,
         searching: true,
         "ordering": true,
-        'columnDefs': [{ 'orderable': false, 'targets': [5] }], // hide sort icon on header of first column
+        'columnDefs': [{ 'orderable': false, 'targets': [4] }], // hide sort icon on header of first column
     });
 }
 $(document).ready(function () {
     dataTableAgreements();
-    var date = new Date();
-
 })
 
 function openAgreementModal(id) {
@@ -48,7 +46,7 @@ function saveAgreement(id) {
                         title: "Success",
                         text: id > 0 ? "Agreement updated successfully." : "Agreement added successfully.",
                         type: "success"
-                    }).then( function () {
+                    }).then(function () {
                         window.location.reload();
                     });
                 }

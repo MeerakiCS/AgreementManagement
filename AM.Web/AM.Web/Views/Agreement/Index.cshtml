@@ -12,29 +12,27 @@
         <table class="table table-striped custom-table mb-0 " id="agreement-data-table">
             <thead>
                 <tr>
-                    <th>Product </th>
-                    <th>Product Number </th>
-                    <th>Group</th>
-                    @*<th>Price</th>*@
-                    <th>New Price</th>
-                    <th>Action</th>
+                    <th class="text-center">Product </th>
+                    <th class="text-center">Product Number </th>
+                    <th class="text-center">Group</th>
+                    <th class="text-center">New Price</th>
+                    <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td class="text-center">@item.Product.ProductDescription</td>
-                        <td class="text-center">@item.Product.ProductNumber</td>
-                        <td class="text-center">@item.ProductGroup.GroupDescription</td>
-                        @*<td>@item.ProductPrice</td>*@
-                        <td class="text-center">@item.NewPrice</td>
-                        <td class="">
-                                <div>
-                                    <a title="Edit" class="link-color" onclick="openAgreementModal(@item.id)" href="#" data-toggle="modal" data-target="#agreementModal"><i class="fa fa-edit m-r-5"></i> </a>
-                                    <a title="Delete" class="link-color" style="cursor:pointer" href="#" onclick="DeleteAgreement(@item.id)"><i class="fa fa-trash-o m-r-5"></i> </a>
-                                </div>
-                            </td>
+                        <td class="text-center">@(item.Product.ProductDescription)</td>
+                        <td class="text-center">@(item.Product.ProductNumber)</td>
+                        <td class="text-center">@(item.ProductGroup.GroupDescription)</td>
+                        <td class="text-center">@(item.NewPrice)</td>
+                        <td class="text-center">
+                            <div>
+                                <a title="Edit" class="link-color" onclick="openAgreementModal(@item.id)" href="#" data-toggle="modal" data-target="#agreementModal"><i class="fa fa-edit m-r-5"></i> </a>
+                                <a title="Delete" class="link-color" style="cursor:pointer" href="#" onclick="DeleteAgreement(@item.id)"><i class="fa fa-trash-o m-r-5"></i> </a>
+                            </div>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -50,7 +48,6 @@
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body-content">
-
             </div>
         </div>
     </div>

@@ -36,7 +36,11 @@ namespace AM.Web.Controllers
         // GET: AgreementController/Create
         public ActionResult Create()
         {
-            var agreement = new AgreementModel();
+            var agreement = new AgreementModel()
+            {
+                EffectiveDate = DateTime.Now,
+                ExpirationDate = DateTime.Now
+            };
             agreement.ProductGroupList = _agreement.GetProductGroupList();
             agreement.ProductsList = _agreement.GetProductList();
             return PartialView("AddUpdateAgreement", agreement);
