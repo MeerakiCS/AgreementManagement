@@ -16,5 +16,8 @@ namespace AM.Web.Data
         }
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductGroup> ProductGroups { get; set; }
+        public DbSet<Agreement> Agreements { get; set; }
     }
 }
