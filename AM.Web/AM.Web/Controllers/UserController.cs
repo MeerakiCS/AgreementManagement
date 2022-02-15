@@ -1,5 +1,6 @@
 ﻿using AM.Web.Data;
 using AM.Web.Data.BusinessAccess;
+using AM.Web.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,22 +21,16 @@ namespace AM.Web.Controllers
             return View(users);
         }
 
-        // GET: UserController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: UserController/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new UserModel();
+            return PartialView("AddEditUser", model);
         }
 
         // POST: UserController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(UserModel model)
         {
             try
             {

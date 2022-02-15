@@ -14,6 +14,13 @@ function initDatatable() {
         'aaSorting': [[0, 'desc']]
     });
 }
+
+function openUserModal(id) {
+    /* $('#userModal .modal-title').text('Add Employee');*/
+    $('#userModal .modal-body-content').html("<div style='text-align:center;'><i class='mb-1 mt-3 spinner-border text-primary'></i><p>Please wait...</p></div>").load("/User/Create", function () {
+    });
+}
+
 $(document).ready(function () {
     initDatatable();
 })
