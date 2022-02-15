@@ -24,12 +24,12 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.Product.ProductDescription</td>
-                        <td>@item.Product.ProductNumber</td>
-                        <td>@item.ProductGroup.GroupDescription</td>
+                        <td class="text-center">@item.Product.ProductDescription</td>
+                        <td class="text-center">@item.Product.ProductNumber</td>
+                        <td class="text-center">@item.ProductGroup.GroupDescription</td>
                         @*<td>@item.ProductPrice</td>*@
-                        <td>@item.NewPrice</td>
-                        <td class="text-right">
+                        <td class="text-center">@item.NewPrice</td>
+                        <td class="">
                                 <div>
                                     <a title="Edit" class="link-color" onclick="openAgreementModal(@item.id)" href="#" data-toggle="modal" data-target="#agreementModal"><i class="fa fa-edit m-r-5"></i> </a>
                                     <a title="Delete" class="link-color" style="cursor:pointer" href="#" onclick="DeleteAgreement(@item.id)"><i class="fa fa-trash-o m-r-5"></i> </a>

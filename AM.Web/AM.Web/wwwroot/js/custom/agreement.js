@@ -44,15 +44,25 @@ function saveAgreement(id) {
             data: $("#add-update-agreement").serializeToJSON(),
             success: function (response) {
                 if (response.success) {
-                    //toastr.info(response.message, "Information!");
                     $("#agreementModal").modal('hide');
-                    window.location.reload();
+                    swal({
+                        title: "Success",
+                        text: id > 0 ? "Agreement updated successfully." : "Agreement added successfully.",
+                        type: "success"
+                    }).then( function () {
+                        window.location.reload();
+                    });
                 }
                 else {
-                    alert(response.type.toUpperCase() + ', ' + response.message);
+                    if (response.type === 'error') {
+                        swal("Error", response.message, response.type);
+                    } else {
+                        swal("Warning", response.message, response.type);
+                    }
                 }
+
             }, error: function (response) {
-                alert("Something went wrong, please try again");
+                swal("Error", "Something went wrong, please try again");
             }
         });
 
@@ -80,7 +90,15 @@ function DeleteAgreement(id) {
                 data: { id: id },
                 success: function (response) {
                     if (response.success) {
-                        window.location.reload();
+                        $("#agreementModal").modal('hide');
+                        swal({
+                            title: "Success",
+                            text: "Agreement deleted successfully.",
+                            type: "success"
+                        }).then(function () {
+                            window.location.reload();
+                        });
+
                     }
                     else {
                         alert("Something went wrong, please try again");
