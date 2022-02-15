@@ -59,12 +59,26 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Expiration Date<span class="text-danger">*</span></label>
-                    <input class="form-control" required id="expirationDate" value="@Model.ExpirationDateString" name="expirationDate" placeholder="Expiration Date" type="date">
+                    <input class="form-control" required id="expirationDate"  value="@Model.ExpirationDateString" name="expirationDate" placeholder="Expiration Date" type="date">
 
                 </div>
             </div>
         </div>
-    
+        @*<div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Product Price<span class="text-danger">*</span></label>
+                    @if (Model.ProductPrice > 0)
+                    {
+                        <input class="form-control" required id="price" value="@Model.ProductPrice" name="productPrice" placeholder="Price" type="text">
+                    }
+                    else
+                    {
+                        <input class="form-control" required id="price" value="" name="productPrice" placeholder="Price" type="text">
+                    }
+                </div>
+            </div>
+        </div>*@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">

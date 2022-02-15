@@ -22,7 +22,7 @@ namespace AM.Web.Data.BusinessAccess
         }
         public IEnumerable<AgreementModel> GetAgreementsList()
         {
-            var agreements = _context.Agreements.Include(x => x.Product).Include(x => x.ProductGroup);
+            var agreements = _context.Agreements.Include(x => x.Product).Include(x => x.ProductGroup).Include(x=>x.User);
             return _mapper.Map<IEnumerable<AgreementModel>>(agreements).ToList();
         }
 

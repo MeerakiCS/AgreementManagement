@@ -11,10 +11,11 @@ function dataTableAgreements() {
         lengthChange: true,
         searching: true,
         "ordering": true,
-        'columnDefs': [{ 'orderable': false, 'targets': [5] }], // hide sort icon on header of first column
+        'columnDefs': [{ 'orderable': false, 'targets': [7] }], // hide sort icon on header of first column
     });
 }
 $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
     dataTableAgreements();
     var date = new Date();
 
