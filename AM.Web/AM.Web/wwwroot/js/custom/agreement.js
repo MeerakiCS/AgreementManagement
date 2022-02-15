@@ -29,7 +29,6 @@ function openAgreementModal(id) {
     }
 }
 function saveAgreement(id) {
-    debugger
     var formElements = GetFormControlData('add-update-agreement');
     if (formElements && formElements.length > 0) {
         ValidateForm(formElements);
@@ -44,6 +43,7 @@ function saveAgreement(id) {
             type: "POST",
             data: form,
             success: function (response) {
+                debugger
                 if (response.success) {
                     $("#agreementModal").modal('hide');
                     swal({
