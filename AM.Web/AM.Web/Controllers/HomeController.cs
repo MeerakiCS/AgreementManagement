@@ -21,6 +21,7 @@ namespace AM.Web.Controllers
         public IActionResult Index()
         {
             return View();
+          
         }
 
         public IActionResult Privacy()
