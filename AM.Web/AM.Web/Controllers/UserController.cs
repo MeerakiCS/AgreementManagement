@@ -1,8 +1,10 @@
 ﻿using AM.Web.Data;
 using AM.Web.Data.BusinessAccess;
+using AM.Web.Data.Entities;
 using AM.Web.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AM.Web.Controllers
@@ -10,9 +12,9 @@ namespace AM.Web.Controllers
     public class UserController : Controller
     {
         private readonly UserBusinessAccess _user;
-        public UserController(ApplicationDbContext context, IMapper mapper)
+        public UserController(ApplicationDbContext context, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
-            _user = new UserBusinessAccess(context, mapper);
+            _user = new UserBusinessAccess(context, mapper, userManager);
         }
         // GET: UserController
         public ActionResult Index()
@@ -32,14 +34,7 @@ namespace AM.Web.Controllers
         [HttpPost]
         public ActionResult Create(UserModel model)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(_user.CreateUser(model));
         }
 
         // GET: UserController/Edit/5
