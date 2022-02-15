@@ -32,17 +32,20 @@ function saveUser() {
             success: function (response) {
                 if (response.success) {
                     $("#userModal").modal('toggle');
-                    swal("Good job!", "User added successfully", "success");
                     swal({
                         title: "Success",
                         text: "User added successfully",
+                        type: "success"
                     }, function () {
-                        window.location.reload();
+                        location.reload();
                     });
-
                 }
                 else {
-                    alert(response.type.toUpperCase() + ', ' + response.message);
+                    if (response.type === 'error') {
+                        swal("Error", response.message, "response.type");
+                    } else {
+                        swal("Warning", response.message, "response.type");
+                    }
                 }
             }, error: function (response) {
                 alert("Something went wrong, please try again");
