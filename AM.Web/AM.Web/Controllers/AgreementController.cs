@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AM.Web.Data;
+using AM.Web.Data.BusinessAccess;
+using AM.Web.Models;
+using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,10 +13,16 @@ namespace AM.Web.Controllers
 {
     public class AgreementController : Controller
     {
+        private readonly AgreementBusinessAccess _agreement;
+        public AgreementController(IMapper mapper, ApplicationDbContext context)
+        {
+            _agreement = new AgreementBusinessAccess(context, mapper);
+
+        }
         // GET: AgreementController
         public ActionResult Index()
         {
-            return View();
+            return View(_agreement.GetAgreementsList());
         }
 
         // GET: AgreementController/Details/5

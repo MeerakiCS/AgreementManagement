@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AM.Web.Models.AgreementModel>
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <table class="table table-striped custom-table mb-0 " id="agreement-data-table">
+                <thead>
+                    <tr>
+                        <th>Product </th>
+                        <th>Product Number </th>
+                        <th>Group</th>
+                        <th>Price</th>
+                        <th>New Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Product.ProductDescription</td>
+                            <td>@item.Product.ProductNumber</td>
+                            <td>@item.ProductGroup.GroupDescription</td>
+                            <td>@item.ProductPrice</td>
+                            <td>@item.NewPrice</td>
+                            @*<td class="text-right">
+                                    <div>
+                                        <a title="Edit" class="link-color" onclick=" GetClients('@client.Id')" href="#" data-toggle="modal" data-target="#edit-client-modal"><i class="fa fa-edit m-r-5"></i> </a>
+                                        <a title="Delete" class="link-color" style="cursor:pointer" href="#" onclick="DeleteClients('@client.Id')"><i class="fa fa-trash-o m-r-5"></i> </a>
+                                    </div>
+                                </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="~/js/custom/agreement.js"></script>
