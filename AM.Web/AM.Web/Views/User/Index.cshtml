@@ -1,33 +1,60 @@
 ﻿@model IEnumerable<AM.Web.Models.UserModel>
+@using AM.Web.Shared
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Users";
 }
-    <div class="card">
-            <div class="card-header">
-                <h3>ViewData["Title"]</h3>
-                <div class="card-title"><a class="btn btn-primary btn-sm">Add User</a></div>
-            </div>
-             <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <td>Full Name</td>
-                        <td>Email</td>
-                        <td>Active</td>
-                        <td>Action</td>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach (var item in Model)
+<div class="card">
+    <div class="card-header">
+        <h3>ViewData["Title"]</h3>
+        <div class="card-title"><a class="btn btn-primary btn-sm">Add User</a></div>
+    </div>
+    <div class="card-body">
+        <table class="table" id="users-table">
+            <thead>
+                <tr>
+                    <td>Full Name</td>
+                    <td>Email</td>
+                    <td>Active</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.IsNotNullOrEmpty() && Model.Any())
                 {
+                    @foreach (var item in Model)
+                    {
                         <tr>
                             <td>Full Name</td>
                             <td>Email</td>
                             <td>Active</td>
                             <td>Action</td>
                         </tr>
+                    }
                 }
-                </tbody>
-            </table>
-            </div>
+            </tbody>
+        </table>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/custom/user.js"></script>
