@@ -60,7 +60,14 @@ namespace AM.Web.Controllers
         public ActionResult Edit(int id)
         {
             var agreement = _agreement.GetAgreementById(id);
-
+            if (agreement.EffectiveDate.Equals(DateTime.MinValue))
+            {
+                agreement.EffectiveDate = DateTime.Now;
+            }
+            if (agreement.ExpirationDate.Equals(DateTime.MinValue))
+            {
+                agreement.ExpirationDate = DateTime.Now;
+            }
             agreement.ProductGroupList = _agreement.GetProductGroupList();
             agreement.ProductsList = _agreement.GetProductList();
             agreement.ProductsList.Select(x => { x.Selected = agreement.ProductId == x.Value; return x; }).ToList();

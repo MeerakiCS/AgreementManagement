@@ -50,7 +50,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Effective Date<span class="text-danger">*</span></label>
-                    <input class="form-control datepicker" required id="effectiveDate" value="@Model.EffectiveDateString" name="EffectiveDate" placeholder="Effective Date" type="text">
+                    <input class="form-control datepicker" required id="effectiveDate" value="@Model.EffectiveDate.ToString("MM'/'dd'/'yyyy")" name="effectiveDate" placeholder="Effective Date" type="text">
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Expiration Date<span class="text-danger">*</span></label>
-                    <input class="form-control datepicker" required id="expirationDate" value="@Model.ExpirationDateString" name="ExpirationDate" placeholder="Expiration Date" type="text">
+                    <input class="form-control datepicker" required id="expirationDate" value="@Model.ExpirationDate.ToString("MM'/'dd'/'yyyy")" name="expirationDate" placeholder="Expiration Date" type="text">
                 </div>
             </div>
         </div>
@@ -104,6 +104,8 @@
 </form>
 <script>
     $(document).ready(function () {
-        $(".datepicker").datepicker();
+        $(".datepicker").datepicker({
+            formate: "MM/dd/yyyy"
+        });
     })
 </script>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -55,15 +56,15 @@ namespace AM.Web.Data.BusinessAccess
 
         public Response AddNewAgreement(AgreementModel model)
         {
-            var productGroup = _context.ProductGroups.ToList();
-            var products = _context.Products.ToList();
             var respnse = new Response();
             try
             {
+                model.EffectiveDate = DateTime.ParseExact(model.EffectiveDateString, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                model.ExpirationDate = DateTime.ParseExact(model.ExpirationDateString, "MM/dd/yyyy", CultureInfo.InvariantCulture);
                 var agreement = new Agreement
                 {
-                    ProductGroup = productGroup.SingleOrDefault(x => x.Id == model.ProductGroupId),
-                    Product = products.SingleOrDefault(x => x.Id == model.ProductId),
+                    ProductGroup = _context.ProductGroups.SingleOrDefault(x => x.Id == model.ProductGroupId),
+                    Product = _context.Products.SingleOrDefault(x => x.Id == model.ProductId),
                     EffectiveDate = model.EffectiveDate,
                     ExpirationDate = model.ExpirationDate,
                     ProductPrice = model.ProductPrice,
@@ -88,19 +89,16 @@ namespace AM.Web.Data.BusinessAccess
         }
         public Response UpdateAgreement(AgreementModel model)
         {
-            var agreements = _context.Agreements.ToList();
-            var productGroup = _context.ProductGroups.ToList();
-            var products = _context.Products.ToList();
             var respnse = new Response();
             try
             {
-                var isExist = agreements.Where(x => x.Id == model.Id).Any();
-                if (isExist)
+                model.EffectiveDate = DateTime.ParseExact(model.EffectiveDateString, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                model.ExpirationDate = DateTime.ParseExact(model.ExpirationDateString, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                var agreement = _context.Agreements.SingleOrDefault(x => x.Id == model.Id);
+                if (agreement.IsNotNullOrEmpty())
                 {
-                    var agreement = agreements.SingleOrDefault(x => x.Id == model.Id);
-                    agreement.ProductGroup = productGroup.SingleOrDefault(x => x.Id == model.ProductGroupId);
-                    agreement.ProductGroup = productGroup.SingleOrDefault(x => x.Id == model.ProductGroupId);
-                    agreement.Product = products.SingleOrDefault(x => x.Id == model.ProductId);
+                    agreement.ProductGroup = _context.ProductGroups.SingleOrDefault(x => x.Id == model.ProductGroupId);
+                    agreement.Product = _context.Products.SingleOrDefault(x => x.Id == model.ProductId);
                     agreement.EffectiveDate = model.EffectiveDate;
                     agreement.ExpirationDate = model.ExpirationDate;
                     agreement.ProductPrice = model.ProductPrice;
