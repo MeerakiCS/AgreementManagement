@@ -51,7 +51,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Effective Date<span class="text-danger">*</span></label>
-                    <input class="form-control" required id="expirationDate" value="@Model.ExpirationDate" name="effectiveDate" placeholder="Effective Date" type="date">
+                    <input class="form-control" required id="expirationDate" value="@Model.ExpirationDate.ToString("mm/dd/yyyy")" name="effectiveDate" placeholder="Effective Date" type="date">
 
                 </div>
             </div>
@@ -60,7 +60,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Expiration Date<span class="text-danger">*</span></label>
-                    <input class="form-control" required id="expirationDate" value="@Model.ExpirationDate" name="expirationDate" placeholder="Expiration Date" type="date">
+                    <input class="form-control" required id="expirationDate" value="@Model.ExpirationDate.ToString("mm/dd/yyyy")" name="expirationDate" placeholder="Expiration Date" type="date">
 
                 </div>
             </div>
@@ -68,8 +68,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label>New Price<span class="text-danger">*</span></label>
-                    @if (Model.NewPrice > 0)
+                    <label>Product Price<span class="text-danger">*</span></label>
+                    @if (Model.ProductPrice > 0)
                     {
                         <input class="form-control" required id="price" value="@Model.ProductPrice" name="productPrice" placeholder="Price" type="text">
                     }

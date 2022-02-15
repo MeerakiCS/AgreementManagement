@@ -82,7 +82,25 @@ namespace AM.Web.Data.BusinessAccess
             return _mapper.Map<AgreementModel>(agreement);
         }
 
-
+        public Response DeleteAgreementById(int id)
+        {
+            var respnse = new Response();
+            var agreements = _context.Agreements.ToList();
+            var isExist = agreements.Where(x => x.Id == id).Any();
+            if (isExist)
+            {
+                _context.Remove(agreements.SingleOrDefault(x=>x.Id==id));
+                _context.SaveChanges();
+                respnse.Success = true;
+                respnse.Message = "Agreement has been deleted successfully.";
+            }
+            else
+            {
+                respnse.Success = false;
+                respnse.Message = "Agreement has been deleted successfully.";
+            }
+            return respnse;
+        }
 
     }
     }

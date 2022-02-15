@@ -51,9 +51,11 @@ namespace AM.Web.Controllers
         public ActionResult Edit(int id)
         {
             var agreement = _agreement.GetAgreementById(id);
-           
+
             agreement.ProductGroupList = _agreement.GetProductGroupList();
             agreement.ProductsList = _agreement.GetProductList();
+            agreement.ProductsList.Select(x => { x.Selected = agreement.ProductId == x.Value; return x; }).ToList();
+            agreement.ProductGroupList.Select(x => { x.Selected = agreement.ProductGroupId == x.Value; return x; }).ToList();
             return PartialView("AddUpdateAgreement", agreement);
         }
 
@@ -71,11 +73,11 @@ namespace AM.Web.Controllers
                 return View();
             }
         }
-
+        [HttpDelete]
         // GET: AgreementController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return Json(_agreement.DeleteAgreementById(id));
         }
 
         // POST: AgreementController/Delete/5

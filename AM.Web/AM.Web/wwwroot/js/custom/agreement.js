@@ -59,3 +59,21 @@ function saveAgreement(id) {
     }
 }
 
+function DeleteAgreement(id) {
+    
+        $.ajax({
+            url: "/Agreement/Delete",
+            type: "Delete",
+            data: { id: id },
+            success: function (response) {
+                if (response.success) {
+                    window.location.reload();
+                }
+                else {
+                    alert("Something went wrong, please try again");
+                }
+
+            }
+        })
+    }
+
