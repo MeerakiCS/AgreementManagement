@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AM.Web.Models.UserModel>
+@{
+    ViewData["Title"] = "Users";
+}
+    <div class="card">
+            <div class="card-header">
+                <h3>ViewData["Title"]</h3>
+                <div class="card-title"><a class="btn btn-primary btn-sm">Add User</a></div>
+            </div>
+             <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Full Name</td>
+                        <td>Email</td>
+                        <td>Active</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>Full Name</td>
+                        <td>Email</td>
+                        <td>Active</td>
+                        <td>Action</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+            </div>
+    </div>
