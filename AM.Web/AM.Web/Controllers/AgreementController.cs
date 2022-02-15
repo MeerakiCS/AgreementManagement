@@ -1,13 +1,16 @@
 ﻿using AM.Web.Data;
 using AM.Web.Data.BusinessAccess;
+using AM.Web.Data.Entities;
 using AM.Web.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace AM.Web.Controllers
@@ -16,9 +19,9 @@ namespace AM.Web.Controllers
     public class AgreementController : Controller
     {
         private readonly AgreementBusinessAccess _agreement;
-        public AgreementController(IMapper mapper, ApplicationDbContext context)
+        public AgreementController(IMapper mapper, ApplicationDbContext context, UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor)
         {
-            _agreement = new AgreementBusinessAccess(context, mapper);
+            _agreement = new AgreementBusinessAccess(context, mapper, contextAccessor);
 
         }
         // GET: AgreementController
@@ -36,7 +39,11 @@ namespace AM.Web.Controllers
         // GET: AgreementController/Create
         public ActionResult Create()
         {
-            var agreement = new AgreementModel();
+            var agreement = new AgreementModel()
+            {
+                EffectiveDate = DateTime.Now,
+                ExpirationDate = DateTime.Now
+            };
             agreement.ProductGroupList = _agreement.GetProductGroupList();
             agreement.ProductsList = _agreement.GetProductList();
             return PartialView("AddUpdateAgreement", agreement);

@@ -17,8 +17,6 @@ function dataTableAgreements() {
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
     dataTableAgreements();
-    var date = new Date();
-
 })
 
 function openAgreementModal(id) {
@@ -49,7 +47,7 @@ function saveAgreement(id) {
                         title: "Success",
                         text: id > 0 ? "Agreement updated successfully." : "Agreement added successfully.",
                         type: "success"
-                    }).then( function () {
+                    }).then(function () {
                         window.location.reload();
                     });
                 }

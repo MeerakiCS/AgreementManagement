@@ -2,10 +2,12 @@
 using AM.Web.Models;
 using AM.Web.Shared;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace AM.Web.Data.BusinessAccess
@@ -14,11 +16,17 @@ namespace AM.Web.Data.BusinessAccess
     {
         private readonly IMapper _mapper;
         private readonly ApplicationDbContext _context;
+        private readonly ApplicationUser _user;
 
-        public AgreementBusinessAccess(ApplicationDbContext context, IMapper mapper)
+        public AgreementBusinessAccess(ApplicationDbContext context, IMapper mapper, IHttpContextAccessor contextAccessor)
         {
             _context = context;
             _mapper = mapper;
+            var currentUser = contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (currentUser != null)
+            {
+                _user = _context.ApplicationUser.FirstOrDefault(x => x.Id.Equals(currentUser.Value));
+            }
         }
         public IEnumerable<AgreementModel> GetAgreementsList()
         {
@@ -28,7 +36,7 @@ namespace AM.Web.Data.BusinessAccess
 
         public List<SelectModel> GetProductGroupList()
         {
-            return  _context.ProductGroups.Where(x => x.Active).Select(x => new SelectModel
+            return _context.ProductGroups.Where(x => x.Active).Select(x => new SelectModel
             {
                 Text = x.GroupDescription,
                 Value = x.Id
@@ -37,12 +45,12 @@ namespace AM.Web.Data.BusinessAccess
 
         public List<SelectModel> GetProductList()
         {
-            return  _context.Products.Where(x => x.Active).Select(x => new SelectModel
+            return _context.Products.Where(x => x.Active).Select(x => new SelectModel
             {
                 Text = x.ProductDescription,
                 Value = x.Id
             }).ToList();
-            
+
         }
 
         public Response AddNewAgreement(AgreementModel model)
@@ -54,18 +62,19 @@ namespace AM.Web.Data.BusinessAccess
             {
                 var agreement = new Agreement
                 {
-                    ProductGroup = productGroup.SingleOrDefault(x=>x.Id==model.ProductGroupId),
-                    Product = products.SingleOrDefault(x=>x.Id==model.ProductId),
-                   EffectiveDate=model.EffectiveDate,
-                   ExpirationDate=model.ExpirationDate,
-                   ProductPrice=model.ProductPrice,
-                   NewPrice=model.NewPrice,
-                   Active=model.Active
+                    ProductGroup = productGroup.SingleOrDefault(x => x.Id == model.ProductGroupId),
+                    Product = products.SingleOrDefault(x => x.Id == model.ProductId),
+                    EffectiveDate = model.EffectiveDate,
+                    ExpirationDate = model.ExpirationDate,
+                    ProductPrice = model.ProductPrice,
+                    NewPrice = model.NewPrice,
+                    Active = model.Active,
+                    User = _user
                 };
                 _context.Agreements.Add(agreement);
                 _context.SaveChanges();
                 respnse.Success = true;
-                respnse.Type= ResponseType.Success;
+                respnse.Type = ResponseType.Success;
                 respnse.Message = "Agreement has been added successfully!";
             }
             catch (Exception ex)
@@ -85,10 +94,10 @@ namespace AM.Web.Data.BusinessAccess
             var respnse = new Response();
             try
             {
-                var isExist = agreements.Where(x => x.Id == model.id).Any();
-                 if (isExist)
+                var isExist = agreements.Where(x => x.Id == model.Id).Any();
+                if (isExist)
                 {
-                    var agreement = agreements.SingleOrDefault(x => x.Id == model.id);
+                    var agreement = agreements.SingleOrDefault(x => x.Id == model.Id);
                     agreement.ProductGroup = productGroup.SingleOrDefault(x => x.Id == model.ProductGroupId);
                     agreement.ProductGroup = productGroup.SingleOrDefault(x => x.Id == model.ProductGroupId);
                     agreement.Product = products.SingleOrDefault(x => x.Id == model.ProductId);
@@ -96,6 +105,7 @@ namespace AM.Web.Data.BusinessAccess
                     agreement.ExpirationDate = model.ExpirationDate;
                     agreement.ProductPrice = model.ProductPrice;
                     agreement.NewPrice = model.NewPrice;
+                    agreement.User = _user;
                     agreement.Active = model.Active;
                     _context.Agreements.Update(agreement);
                     _context.SaveChanges();
@@ -109,7 +119,7 @@ namespace AM.Web.Data.BusinessAccess
                     respnse.Type = ResponseType.Warning;
                     respnse.Message = "Agreement not found.";
                 }
-               
+
             }
             catch (Exception ex)
             {
@@ -134,7 +144,7 @@ namespace AM.Web.Data.BusinessAccess
             var isExist = agreements.Where(x => x.Id == id).Any();
             if (isExist)
             {
-                _context.Remove(agreements.SingleOrDefault(x=>x.Id==id));
+                _context.Remove(agreements.SingleOrDefault(x => x.Id == id));
                 _context.SaveChanges();
                 respnse.Success = true;
                 respnse.Message = "Agreement has been deleted successfully.";
@@ -148,4 +158,4 @@ namespace AM.Web.Data.BusinessAccess
         }
 
     }
-    }
+}

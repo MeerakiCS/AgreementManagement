@@ -5,7 +5,7 @@ namespace AM.Web.Models
 {
     public class AgreementModel
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public UserModel User { get; set; }
         public ProductGroupModel ProductGroup { get; set; }
         public int ProductGroupId { get; set; }
@@ -13,8 +13,8 @@ namespace AM.Web.Models
         public int ProductId { get; set; }
         public DateTime EffectiveDate { get; set; }
         public DateTime ExpirationDate { get; set; }
-        public string EffectiveDateString { get { return EffectiveDate.ToString("dd/mm/yyyy"); } }
-        public string ExpirationDateString { get { return ExpirationDate.ToString("dd/mm/yyyy"); } }
+        public string EffectiveDateString { get { return EffectiveDate.ToString("MM/dd/yyyy"); } }
+        public string ExpirationDateString { get { return ExpirationDate.ToString("MM/dd/yyyy"); } }
         public decimal ProductPrice { get; set; }
         public decimal NewPrice { get; set; }
         public List<SelectModel> ProductGroupList { get; set; }
