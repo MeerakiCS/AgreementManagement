@@ -34,7 +34,10 @@ namespace AM.Web.Controllers
         // GET: AgreementController/Create
         public ActionResult Create()
         {
-            return View();
+            var agreement = new AgreementModel();
+            agreement.ProductGroupList = _agreement.GetProductGroupList();
+            agreement.ProductsList = _agreement.GetProductGroupList();
+            return PartialView("AddUpdateAgreement", agreement);
         }
 
         // POST: AgreementController/Create

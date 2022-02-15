@@ -1,0 +1,92 @@
+﻿@model AM.Web.Models.AgreementModel
+@using AM.Web.Shared
+<link href="~/lib/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+<form id="add-update-agreement">
+    <div class="modal-body">
+        <input class="form-control" value="@Model.id" name="Id" id="Id" type="hidden">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Group<span class="text-danger">*</span></label>
+                    <select id="productGroupList" class="form-control">
+                        <option selected disabled>--Select--</option>
+                        @foreach (var item in Model.ProductGroupList)
+                        {
+                            @if (item.Selected)
+                            {
+                                <option selected value="@item.Value">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    </select>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Product<span class="text-danger">*</span></label>
+                    <select id="productsList" class="form-control">
+                        <option disabled selected>--Select--</option>
+                        @foreach (var item in Model.ProductsList)
+                        {
+                            @if (item.Selected)
+                            {
+                                <option selected value="@item.Value">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Effective Date<span class="text-danger">*</span></label>
+                    <div class='input-group date' id="datePickerEffectiveDate">
+                        @Html.TextBox("effective-date", DateTime.UtcNow.ToString("MM/dd/yyyy"), new { type = "text", @class = "form-control", @readonly = true })
+                        <span class="input-group-addon">
+                            <span class=" fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Expiration Date<span class="text-danger">*</span></label>
+                    <div class='input-group date' id="datePickerExpirationDate">
+                        @Html.TextBox("expiration-date", DateTime.UtcNow.ToString("MM/dd/yyyy"), new { type = "text", @class = "form-control", @readonly = true })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>New Price<span class="text-danger">*</span></label>
+                    <input class="form-control" id="Email" value="@Model.NewPrice" name="newPrice" placeholder="Email" type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="saveAgreement(@Model.id)">
+            @(@Model.id > 0?"Update":"Save")
+        </button>
+    </div>
+</form>
+<script src="~/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>

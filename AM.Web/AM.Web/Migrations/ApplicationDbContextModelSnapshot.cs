@@ -35,7 +35,7 @@ namespace AM.Web.Migrations
                     b.Property<decimal>("NewPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ProductGroupid")
+                    b.Property<int?>("ProductGroupId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ProductId")
@@ -49,7 +49,7 @@ namespace AM.Web.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("ProductGroupid");
+                    b.HasIndex("ProductGroupId");
 
                     b.HasIndex("ProductId");
 
@@ -148,7 +148,7 @@ namespace AM.Web.Migrations
                     b.Property<string>("ProductDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProductGroupid")
+                    b.Property<int?>("ProductGroupId")
                         .HasColumnType("int");
 
                     b.Property<string>("ProductNumber")
@@ -156,14 +156,14 @@ namespace AM.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductGroupid");
+                    b.HasIndex("ProductGroupId");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("AM.Web.Data.Entities.ProductGroup", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -177,7 +177,7 @@ namespace AM.Web.Migrations
                     b.Property<string>("GroupDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("ProductGroups");
                 });
@@ -317,7 +317,7 @@ namespace AM.Web.Migrations
                 {
                     b.HasOne("AM.Web.Data.Entities.ProductGroup", "ProductGroup")
                         .WithMany()
-                        .HasForeignKey("ProductGroupid");
+                        .HasForeignKey("ProductGroupId");
 
                     b.HasOne("AM.Web.Data.Entities.Product", "Product")
                         .WithMany()
@@ -338,7 +338,7 @@ namespace AM.Web.Migrations
                 {
                     b.HasOne("AM.Web.Data.Entities.ProductGroup", "ProductGroup")
                         .WithMany()
-                        .HasForeignKey("ProductGroupid");
+                        .HasForeignKey("ProductGroupId");
 
                     b.Navigation("ProductGroup");
                 });

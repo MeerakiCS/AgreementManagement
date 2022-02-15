@@ -3,7 +3,7 @@
     public class ProductGroup
     {
         public ProductGroup() { Active = true; }
-        public int id { get; set; }
+        public int Id { get; set; }
         public string GroupDescription { get; set; }
         public string GroupCode { get; set; }
         public bool Active { get; set; }
