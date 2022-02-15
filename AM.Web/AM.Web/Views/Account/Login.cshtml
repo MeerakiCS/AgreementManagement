@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>AM - Login</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+</head>
+<body class="account-page">
+    <div class="main-wrapper">
+        <div class="account-content">
+            <div class="container">
+                <div class="container-fluid account-box">
+                    <div class="account-wrapper">
+                        <div class="account-logo">
+                            <img src="~/images/login-icon-3060.png" class="h-25 w-25" alt="Login" />
+                        </div>
+                        <form id="loginform" asp-controller="Account" asp-action="login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-1-2x mt-4p"></i></span>
+                                    <input onblur="validEmail(this)" required class="form-control info" name="Email" id="Email" type="text" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-1-2x mt-4p"></i></span>
+                                    <input required class="form-control info" name="Password" id="Password" type="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <span class="login-message" id="login-message">@ViewBag.Message</span>
+                            </div>
+                            <div class="py-4 text-center">
+                                <button id="myBtn" class="btn btn-primary account-btn btn-block" type="button">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/custom/custom-form-validation.js"></script>
+<script src="~/js/custom/login.js"></script>

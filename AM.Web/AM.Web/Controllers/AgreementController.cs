@@ -2,6 +2,7 @@
 using AM.Web.Data.BusinessAccess;
 using AM.Web.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace AM.Web.Controllers
 {
+    [Authorize]
     public class AgreementController : Controller
     {
         private readonly AgreementBusinessAccess _agreement;

@@ -7,11 +7,11 @@ function dataTableAgreements() {
         bInfo: true,
         bLengthChange: false,
         bAutoWidth: true,
-        pageLength: 25,
+        pageLength: 10,
+        lengthChange: true,
         searching: true,
         "ordering": true,
-        //'columnDefs': [{ 'orderable': false, 'targets': [5] }], // hide sort icon on header of first column
-        'aaSorting': [[0, 'desc']]
+        'columnDefs': [{ 'orderable': false, 'targets': [5] }], // hide sort icon on header of first column
     });
 }
 $(document).ready(function () {
@@ -29,7 +29,7 @@ function openAgreementModal(id) {
     else {
         $('#agreementModal .modal-body-content').html("<div style='text-align:center;'><i class='mb-1 mt-3 spinner-border text-primary'></i><p>Please wait...</p></div>").load("/Agreement/Create", function () {
         })
-            }
+    }
 }
 function saveAgreement(id) {
     var formElements = GetFormControlData('add-update-agreement');

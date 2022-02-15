@@ -164,7 +164,11 @@ function validEmail(e) {
         if (!inputvalues.match(regex)) {
             if ($("#" + element.elementId + 'Message').length === 0) {
                 var span = '<span class="message text-danger" id="' + element.elementId + "Message" + '">Enter valid ' + element.message + ' </span>';
-                $(e).after(span);
+                if ($(e).parent('.input-group') && $(e).parent('.input-group').length) {
+                    $(e).parent('.input-group').after(span);
+                } else {
+                    $(e).after(span);
+                }
                 $("#" + element.elementId + "Required").addClass("text-danger");
             }
             return false;

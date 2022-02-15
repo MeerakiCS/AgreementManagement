@@ -8,6 +8,7 @@ function initDatatable() {
         bLengthChange: false,
         bAutoWidth: true,
         pageLength: 10,
+        lengthChange: true,
         searching: true,
         "ordering": true,
         'columnDefs': [{ 'orderable': false, 'targets': [3] }], // hide sort icon on header of first column

@@ -3,12 +3,14 @@ using AM.Web.Data.BusinessAccess;
 using AM.Web.Data.Entities;
 using AM.Web.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AM.Web.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly UserBusinessAccess _user;
@@ -35,48 +37,6 @@ namespace AM.Web.Controllers
         public ActionResult Create(UserModel model)
         {
             return Json(_user.CreateUser(model));
-        }
-
-        // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: UserController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: UserController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
