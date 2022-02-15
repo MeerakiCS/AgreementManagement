@@ -16,19 +16,17 @@
                     <td>Full Name</td>
                     <td>Email</td>
                     <td class="text-center">Active</td>
-                    <td class="text-center">Action</td>
                 </tr>
             </thead>
             <tbody>
                 @if (Model.IsNotNullOrEmpty() && Model.Any())
                 {
-                    @foreach (var user in Model)
+                    foreach (var user in Model)
                     {
                         <tr>
                             <td>@user.FullName</td>
                             <td>@user.Email</td>
                             <td class="text-center">@(user.Active?"Active":"Inactive")</td>
-                            <td class="text-center">-</td>
                         </tr>
                     }
                 }
@@ -46,7 +44,6 @@
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body-content">
-
             </div>
         </div>
     </div>
