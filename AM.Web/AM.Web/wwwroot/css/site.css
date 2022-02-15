@@ -92,3 +92,46 @@ body {
     border-radius: 0.25rem;
     opacity: .5;
 }
+
+.container-fluid {
+    width: 40%;
+}
+
+.input-group-addon {
+    width: 7%;
+    text-align: center;
+    padding-top: 6px;
+    border: 1px solid #ced4da;
+    border-right: none;
+    background: lightgray;
+}
+
+.account-page {
+    align-items: center;
+    background-image: url(../images/login-background.jpg);
+    background-size: 1920px 1080px;
+    background-repeat: no-repeat, repeat;
+}
+
+.account-box {
+    background-color: #fff;
+    border: 1px solid #ededed;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 20%);
+    margin: 0 auto;
+    overflow: hidden;
+    width: 480px;
+}
+
+.account-wrapper {
+    padding: 30px;
+}
+
+.account-content {
+    padding: 20px 0;
+}
+
+.account-logo {
+    margin-bottom: 30px;
+    text-align: center;
+}

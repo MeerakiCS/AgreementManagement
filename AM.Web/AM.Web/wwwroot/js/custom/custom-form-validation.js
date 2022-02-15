@@ -18,7 +18,6 @@ function removeValidation(formId) {
 }
 
 function GetFormControlData(formId) {
-    debugger
     var formElements = [];
     $('#' + formId + " input").each(
         function () {
@@ -60,7 +59,6 @@ function ValidateForm(formElements) {
     var isFocus = false;
     isValidate = true;
     $.each(formElements, function (idx, element) {
-        debugger
         var elmnt = $("#" + element.elementId);
         if (!elmnt.val() || (elmnt.val().length === 0 || elmnt.val().length === [] && elmnt.val().trim() == "") || elmnt.val() == " ") {
             isValidate = false;
@@ -165,7 +163,11 @@ function validEmail(e) {
         if (!inputvalues.match(regex)) {
             if ($("#" + element.elementId + 'Message').length === 0) {
                 var span = '<span class="message text-danger" id="' + element.elementId + "Message" + '">Enter valid ' + element.message + ' </span>';
-                $(e).after(span);
+                if ($(e).parent('.input-group') && $(e).parent('.input-group').length) {
+                    $(e).parent('.input-group').after(span);
+                } else {
+                    $(e).after(span);
+                }
                 $("#" + element.elementId + "Required").addClass("text-danger");
             }
             return false;

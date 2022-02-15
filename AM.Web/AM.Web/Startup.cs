@@ -35,6 +35,10 @@ namespace AM.Web
                 mc.AddProfile(new MappingProfile());
             });
             IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromDays(15);//You can set Time   
+            });
             services.AddSingleton(mapper);
             services.AddIdentity<ApplicationUser, IdentityRole>()
              .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -58,17 +62,18 @@ namespace AM.Web
                 app.UseHsts();
             }
 
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=user}/{action=Index}");
+                    pattern: "{controller=agreement}/{action=Index}");
             });
         }
     }
