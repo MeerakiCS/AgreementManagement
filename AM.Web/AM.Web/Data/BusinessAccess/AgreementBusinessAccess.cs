@@ -77,6 +77,49 @@ namespace AM.Web.Data.BusinessAccess
 
             return respnse;
         }
+        public Response UpdateAgreement(AgreementModel model)
+        {
+            var agreements = _context.Agreements.ToList();
+            var productGroup = _context.ProductGroups.ToList();
+            var products = _context.Products.ToList();
+            var respnse = new Response();
+            try
+            {
+                var isExist = agreements.Where(x => x.Id == model.id).Any();
+                 if (isExist)
+                {
+                    var agreement = agreements.SingleOrDefault(x => x.Id == model.id);
+                    agreement.ProductGroup = productGroup.SingleOrDefault(x => x.Id == model.ProductGroupId);
+                    agreement.ProductGroup = productGroup.SingleOrDefault(x => x.Id == model.ProductGroupId);
+                    agreement.Product = products.SingleOrDefault(x => x.Id == model.ProductId);
+                    agreement.EffectiveDate = model.EffectiveDate;
+                    agreement.ExpirationDate = model.ExpirationDate;
+                    agreement.ProductPrice = model.ProductPrice;
+                    agreement.NewPrice = model.NewPrice;
+                    agreement.Active = model.Active;
+                    _context.Agreements.Update(agreement);
+                    _context.SaveChanges();
+                    respnse.Success = true;
+                    respnse.Type = ResponseType.Success;
+                    respnse.Message = "Agreement has been added successfully.";
+                }
+                else
+                {
+                    respnse.Success = false;
+                    respnse.Type = ResponseType.Warning;
+                    respnse.Message = "Agreement not found.";
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                respnse.Exception = ex.InnerException.IsNotNullOrEmpty() ? ex.InnerException.Message : ex.Message;
+                respnse.Type = ResponseType.Error;
+                respnse.Message = $"Something went wrong. Error: {respnse.Exception}";
+            }
+
+            return respnse;
+        }
 
         public AgreementModel GetAgreementById(int id)
         {
