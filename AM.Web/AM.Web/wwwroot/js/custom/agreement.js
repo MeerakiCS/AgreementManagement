@@ -30,16 +30,20 @@ function openAgreementModal(id) {
     }
 }
 function saveAgreement(id) {
+    debugger
     var formElements = GetFormControlData('add-update-agreement');
     if (formElements && formElements.length > 0) {
         ValidateForm(formElements);
     }
     var url = id > 0 ? "Agreement/Edit" : "Agreement/Create"
     if (isValidate) {
+        let form = $("#add-update-agreement").serializeToJSON()
+        form.expirationDateString = form.expirationDate;
+        form.effectiveDateString = form.effectiveDate;
         $.ajax({
             url: url,
             type: "POST",
-            data: $("#add-update-agreement").serializeToJSON(),
+            data: form,
             success: function (response) {
                 if (response.success) {
                     $("#agreementModal").modal('hide');
