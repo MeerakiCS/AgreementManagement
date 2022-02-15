@@ -3,7 +3,7 @@
 <link href="~/lib/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
 <form id="add-update-agreement">
     <div class="modal-body">
-        <input class="form-control" value="@Model.id" name="Id" id="Id" type="hidden">
+        <input class="form-control" value="@Model.Id" name="Id" id="Id" type="hidden">
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -83,7 +83,7 @@
             <div class="col-2">Active</div>
             <div class="col-9">
                 <div class="form-group">
-                    @if (Model.id > 0)
+                    @if (Model.Id > 0)
                     {
                         <input class="checkBoxSize" @Html.Raw(Model.Active ? "checked" : "") id="active" value="@Model.NewPrice" name="active" placeholder="Price" type="checkbox">
                     }
@@ -97,8 +97,8 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="saveAgreement(@Model.id)">
-            @(@Model.id > 0?"Update":"Save")
+        <button type="button" class="btn btn-primary" onclick="saveAgreement(@Model.Id)">
+            @(Model.Id > 0?"Update":"Save")
         </button>
     </div>
 </form>

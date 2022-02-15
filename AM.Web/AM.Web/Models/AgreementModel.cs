@@ -5,7 +5,7 @@ namespace AM.Web.Models
 {
     public class AgreementModel
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public UserModel User { get; set; }
         public ProductGroupModel ProductGroup { get; set; }
         public int ProductGroupId { get; set; }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AM.Web.Controllers
 {
@@ -17,6 +18,7 @@ namespace AM.Web.Controllers
         public UserController(ApplicationDbContext context, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _user = new UserBusinessAccess(context, mapper, userManager);
+         
         }
         // GET: UserController
         public ActionResult Index()
