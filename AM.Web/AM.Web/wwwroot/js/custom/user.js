@@ -31,10 +31,15 @@ function saveUser() {
             data: $("#user-form").serializeToJSON(),
             success: function (response) {
                 if (response.success) {
-                    //toastr.info(response.message, "Information!");
                     $("#userModal").modal('toggle');
-                    alert("User added successfully");
-                    window.location.reload();
+                    swal("Good job!", "User added successfully", "success");
+                    swal({
+                        title: "Success",
+                        text: "User added successfully",
+                    }, function () {
+                        window.location.reload();
+                    });
+
                 }
                 else {
                     alert(response.type.toUpperCase() + ', ' + response.message);
