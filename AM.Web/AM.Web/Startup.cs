@@ -1,5 +1,7 @@
 using AM.Web.Data;
 using AM.Web.Data.Entities;
+using AM.Web.Data.Mapping;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,10 +30,15 @@ namespace AM.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
             services.AddIdentity<ApplicationUser, IdentityRole>()
-         .AddEntityFrameworkStores<ApplicationDbContext>()
-         .AddDefaultTokenProviders();
+             .AddEntityFrameworkStores<ApplicationDbContext>()
+             .AddDefaultTokenProviders();
             services.AddDbContext<ApplicationDbContext>(options =>
                                                         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
                                                         ?? throw new InvalidOperationException("No environmental configuration has been set for the database.")));
@@ -50,6 +57,8 @@ namespace AM.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
