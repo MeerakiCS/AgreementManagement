@@ -43,15 +43,25 @@ function saveAgreement(id) {
             data: $("#add-update-agreement").serializeToJSON(),
             success: function (response) {
                 if (response.success) {
-                    //toastr.info(response.message, "Information!");
                     $("#agreementModal").modal('hide');
-                    window.location.reload();
+                    swal({
+                        title: "Success",
+                        text: id > 0 ? "Agreement updated successfully." : "Agreement added successfully.",
+                        type: "success"
+                    }).then( function () {
+                        window.location.reload();
+                    });
                 }
                 else {
-                    alert(response.type.toUpperCase() + ', ' + response.message);
+                    if (response.type === 'error') {
+                        swal("Error", response.message, response.type);
+                    } else {
+                        swal("Warning", response.message, response.type);
+                    }
                 }
+
             }, error: function (response) {
-                alert("Something went wrong, please try again");
+                swal("Error", "Something went wrong, please try again");
             }
         });
 
@@ -59,20 +69,43 @@ function saveAgreement(id) {
 }
 
 function DeleteAgreement(id) {
-    
-        $.ajax({
-            url: "/Agreement/Delete",
-            type: "Delete",
-            data: { id: id },
-            success: function (response) {
-                if (response.success) {
-                    window.location.reload();
-                }
-                else {
-                    alert("Something went wrong, please try again");
-                }
+    swal({
+        title: "Warning",
+        text: " Are you certain you want to delete ?",
+        icon: "warning",
+        buttons: true,
 
-            }
-        })
-    }
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes",
+        closeOnConfirm: false,
+        dangerMode: true,
+    }).then((confirm) => {
+        if (confirm) {
+            $.ajax({
+                url: "/Agreement/Delete",
+                type: "Delete",
+                data: { id: id },
+                success: function (response) {
+                    if (response.success) {
+                        $("#agreementModal").modal('hide');
+                        swal({
+                            title: "Success",
+                            text: "Agreement deleted successfully.",
+                            type: "success"
+                        }).then(function () {
+                            window.location.reload();
+                        });
+
+                    }
+                    else {
+                        alert("Something went wrong, please try again");
+                    }
+
+                }
+            })
+        }
+    })
+}
 
