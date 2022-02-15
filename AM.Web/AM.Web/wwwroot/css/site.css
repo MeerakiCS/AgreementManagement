@@ -121,6 +121,7 @@ body {
     margin: 0 auto;
     overflow: hidden;
     width: 480px;
+    margin-top: 80px;
 }
 
 .account-wrapper {

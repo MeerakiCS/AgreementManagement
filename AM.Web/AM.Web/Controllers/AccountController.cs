@@ -42,6 +42,7 @@ namespace AM.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                ViewBag.email = model.Email;
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {

@@ -36,19 +36,19 @@ function saveUser() {
                         title: "Success",
                         text: "User added successfully",
                         type: "success"
-                    }, function () {
+                    }).then(function () {
                         location.reload();
-                    });
+                    })
                 }
                 else {
                     if (response.type === 'error') {
-                        swal("Error", response.message, "response.type");
+                        swal("Error", response.message, response.type);
                     } else {
-                        swal("Warning", response.message, "response.type");
+                        swal("Warning", response.message, response.type);
                     }
                 }
             }, error: function (response) {
-                alert("Something went wrong, please try again");
+                swal("Error", "Something went wrong, please try again", "error");
             }
         });
     }

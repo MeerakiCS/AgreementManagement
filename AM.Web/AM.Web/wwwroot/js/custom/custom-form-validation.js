@@ -56,7 +56,6 @@ function GetFormControlData(formId) {
 }
 
 function ValidateForm(formElements) {
-    debugger
     var isFocus = false;
     isValidate = true;
     $.each(formElements, function (idx, element) {
@@ -102,10 +101,10 @@ function ValidateForm(formElements) {
             }
         }
         if (elmnt && elmnt[0].attributes && elmnt[0].attributes.type && elmnt[0].attributes.type.value == 'email') {
-            isValidate = validEmail(document.getElementById(element.elementId)) && isValidate
+            isValidate = (validEmail(document.getElementById(element.elementId)) && isValidate)
         }
-        if (elmnt && elmnt[0].attributes && elmnt[0].attributes.type && elmnt[0].attributes.type.value == 'password') {
-            isValidate = validPassword(document.getElementById(element.elementId)) && isValidate
+        if ((elmnt && elmnt[0].attributes && elmnt[0].attributes.type && elmnt[0].attributes.type.value == 'password') && !elmnt.parents('#loginform')) {
+            isValidate = (validPassword(document.getElementById(element.elementId)) && isValidate)
         }
     });
 }
@@ -190,7 +189,11 @@ function validPassword(e) {
         if (!inputvalues.match(regex)) {
             if ($("#" + element.elementId + 'Message').length === 0) {
                 var span = '<span class="message text-danger" id="' + element.elementId + "Message" + '">' + element.message + ' must be strong </span>';
-                $(e).after(span);
+                if ($(e).parent('.input-group') && $(e).parent('.input-group').length) {
+                    $(e).parent('.input-group').after(span);
+                } else {
+                    $(e).after(span);
+                }
                 $("#" + element.elementId + "Required").addClass("text-danger");
             }
             return false;

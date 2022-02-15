@@ -21,7 +21,6 @@ $(document).ready(function () {
 })
 
 function openAgreementModal(id) {
-    debugger;
     if (id > 0) {
         $('#agreementModal .modal-body-content').html("<div style='text-align:center;'><i class='mb-1 mt-3 spinner-border text-primary'></i><p>Please wait...</p></div>").load("/Agreement/Edit?id=" + id, function () {
         })
