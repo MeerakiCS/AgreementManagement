@@ -67,17 +67,9 @@ namespace AM.Web.Controllers
 
         // POST: AgreementController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(AgreementModel model)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(_agreement.UpdateAgreement(model));
         }
         [HttpDelete]
         // GET: AgreementController/Delete/5
