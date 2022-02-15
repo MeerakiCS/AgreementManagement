@@ -7,7 +7,7 @@
 <link href="~/lib/bootstrap/dist/css/font-awesome.css" rel="stylesheet" />
 <div class="card">
     <div class="card-header">
-        <h3>@ViewData["Title"] <a class="btn btn-primary submit-btn float-right" onclick="openUserModal(0)" data-toggle="modal" data-target="#userModal"> Add User</a></h3>
+        <h3>@ViewData["Title"] <a class="btn btn-primary float-right submit-btn text-white cursor-pointer" onclick="openUserModal(0)" data-toggle="modal" data-target="#userModal"> Add User</a></h3>
     </div>
     <div class="card-body">
         <table class="table" id="users-table">
@@ -15,20 +15,20 @@
                 <tr>
                     <td>Full Name</td>
                     <td>Email</td>
-                    <td>Active</td>
-                    <td>Action</td>
+                    <td class="text-center">Active</td>
+                    <td class="text-center">Action</td>
                 </tr>
             </thead>
             <tbody>
                 @if (Model.IsNotNullOrEmpty() && Model.Any())
                 {
-                    @foreach (var item in Model)
+                    @foreach (var user in Model)
                     {
                         <tr>
-                            <td>Full Name</td>
-                            <td>Email</td>
-                            <td>Active</td>
-                            <td>Action</td>
+                            <td>@user.FullName</td>
+                            <td>@user.Email</td>
+                            <td class="text-center">@(user.Active?"Active":"Inactive")</td>
+                            <td class="text-center">-</td>
                         </tr>
                     }
                 }
