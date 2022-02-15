@@ -18,7 +18,6 @@ function removeValidation(formId) {
 }
 
 function GetFormControlData(formId) {
-    debugger
     var formElements = [];
     $('#' + formId + " input").each(
         function () {
@@ -57,10 +56,10 @@ function GetFormControlData(formId) {
 }
 
 function ValidateForm(formElements) {
+    debugger
     var isFocus = false;
     isValidate = true;
     $.each(formElements, function (idx, element) {
-        debugger
         var elmnt = $("#" + element.elementId);
         if (!elmnt.val() || (elmnt.val().length === 0 || elmnt.val().length === [] && elmnt.val().trim() == "") || elmnt.val() == " ") {
             isValidate = false;
@@ -68,8 +67,8 @@ function ValidateForm(formElements) {
                 let checkTagType = $("#" + element.elementId)[0].nodeName;
                 if (checkTagType == "SELECT") {
                     var span = '<span class="message text-danger" id="' + element.elementId + "Message" + '">Select ' + element.message + ' </span>';
-                    elmnt.next(".select2-container").after(span);
-                    elmnt.next(".select2-container").addClass("input-border");
+                    elmnt.after(span);
+                    elmnt.addClass("input-border");
                 }
                 else {
                     var span = '<span class="message text-danger" id="' + element.elementId + "Message" + '">Enter ' + element.message + ' </span>';

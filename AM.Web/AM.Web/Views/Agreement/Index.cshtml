@@ -6,7 +6,7 @@
 }
 <div class="card">
     <div class="card-header">
-        <h3>@ViewData["Title"] <a class="btn btn-primary submit-btn float-right" onclick="openAgreementModal(0)" data-toggle="modal" data-target="#agreementModal"> Add Agreement</a></h3>
+        <h3>@ViewData["Title"] <a class="btn btn-primary submit-btn text-white float-right" onclick="openAgreementModal(0)" data-toggle="modal" data-target="#agreementModal"> Add Agreement</a></h3>
     </div>
     <div class="card-body">
         <table class="table table-striped custom-table mb-0 " id="agreement-data-table">
@@ -17,6 +17,7 @@
                     <th>Group</th>
                     <th>Price</th>
                     <th>New Price</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,12 +29,12 @@
                         <td>@item.ProductGroup.GroupDescription</td>
                         <td>@item.ProductPrice</td>
                         <td>@item.NewPrice</td>
-                        @*<td class="text-right">
+                        <td class="text-right">
                                 <div>
-                                    <a title="Edit" class="link-color" onclick=" GetClients('@client.Id')" href="#" data-toggle="modal" data-target="#edit-client-modal"><i class="fa fa-edit m-r-5"></i> </a>
-                                    <a title="Delete" class="link-color" style="cursor:pointer" href="#" onclick="DeleteClients('@client.Id')"><i class="fa fa-trash-o m-r-5"></i> </a>
+                                    <a title="Edit" class="link-color" onclick="openAgreementModal(@item.id)" href="#" data-toggle="modal" data-target="#agreementModal"><i class="fa fa-edit m-r-5"></i> </a>
+                                    <a title="Delete" class="link-color" style="cursor:pointer" href="#" onclick="DeleteAggrement('@item.id')"><i class="fa fa-trash-o m-r-5"></i> </a>
                                 </div>
-                            </td>*@
+                            </td>
                     </tr>
                 }
             </tbody>
