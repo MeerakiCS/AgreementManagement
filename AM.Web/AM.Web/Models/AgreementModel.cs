@@ -17,5 +17,6 @@ namespace AM.Web.Models
         public decimal NewPrice { get; set; }
         public List<SelectModel> ProductGroupList { get; set; }
         public List<SelectModel> ProductsList { get; set; }
+        public bool Active { get; set; }
     }
 }

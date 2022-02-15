@@ -60,20 +60,35 @@ function saveAgreement(id) {
 }
 
 function DeleteAgreement(id) {
-    
-        $.ajax({
-            url: "/Agreement/Delete",
-            type: "Delete",
-            data: { id: id },
-            success: function (response) {
-                if (response.success) {
-                    window.location.reload();
-                }
-                else {
-                    alert("Something went wrong, please try again");
-                }
+    swal({
+        title: "Warning",
+        text: " Are you certain you want to delete ?",
+        icon: "warning",
+        buttons: true,
 
-            }
-        })
-    }
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes",
+        closeOnConfirm: false,
+        dangerMode: true,
+    }).then((confirm) => {
+        if (confirm) {
+            $.ajax({
+                url: "/Agreement/Delete",
+                type: "Delete",
+                data: { id: id },
+                success: function (response) {
+                    if (response.success) {
+                        window.location.reload();
+                    }
+                    else {
+                        alert("Something went wrong, please try again");
+                    }
+
+                }
+            })
+        }
+    })
+}
 

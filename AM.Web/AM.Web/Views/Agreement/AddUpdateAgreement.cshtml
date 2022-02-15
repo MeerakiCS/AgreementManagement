@@ -80,6 +80,44 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>New Price<span class="text-danger">*</span></label>
+                    @if (Model.NewPrice > 0)
+                    {
+                        <input class="form-control" required id="newprice" value="@Model.NewPrice" name="newPrice" placeholder="Price" type="text">
+                    }
+                    else
+                    {
+                        <input class="form-control" required id="newprice" value="" name="newPrice" placeholder="Price" type="text">
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col-2">Active</div>
+            <div class="col-9">
+                <div class="form-group">
+                    @if (Model.id > 0)
+                    {
+                        if (Model.Active)
+                        {
+                            <input class="checkBoxSize"  id="active" value="@Model.NewPrice" name="active" checked="checked" placeholder="Price" type="checkbox">
+                        }
+                        else
+                        {
+                            <input class="checkBoxSize"  id="active" value="@Model.NewPrice" name="active" placeholder="Price" type="checkbox">
+                        }
+                    }
+                    else
+                    {
+                        <input class="checkBoxSize"  id="active" value="" name="active" checked="checked" type="checkbox">
+                    }
+                </div>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

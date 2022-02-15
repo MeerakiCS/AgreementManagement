@@ -58,7 +58,9 @@ namespace AM.Web.Data.BusinessAccess
                     Product = products.SingleOrDefault(x=>x.Id==model.ProductId),
                    EffectiveDate=model.EffectiveDate,
                    ExpirationDate=model.ExpirationDate,
-                   ProductPrice=model.ProductPrice
+                   ProductPrice=model.ProductPrice,
+                   NewPrice=model.NewPrice,
+                   Active=model.Active
                 };
                 _context.Agreements.Add(agreement);
                 _context.SaveChanges();
