@@ -38,29 +38,25 @@ namespace AM.Web.Controllers
         {
             var agreement = new AgreementModel();
             agreement.ProductGroupList = _agreement.GetProductGroupList();
-            agreement.ProductsList = _agreement.GetProductGroupList();
+            agreement.ProductsList = _agreement.GetProductList();
             return PartialView("AddUpdateAgreement", agreement);
         }
 
         // POST: AgreementController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(AgreementModel model)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(_agreement.AddNewAgreement(model));
         }
 
         // GET: AgreementController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var agreement = _agreement.GetAgreementById(id);
+           
+            agreement.ProductGroupList = _agreement.GetProductGroupList();
+            agreement.ProductsList = _agreement.GetProductList();
+            return PartialView("AddUpdateAgreement", agreement);
         }
 
         // POST: AgreementController/Edit/5

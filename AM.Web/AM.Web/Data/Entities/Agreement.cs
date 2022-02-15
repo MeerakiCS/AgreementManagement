@@ -4,7 +4,7 @@ namespace AM.Web.Data.Entities
 {
     public class Agreement
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public ApplicationUser User { get; set; }
         public ProductGroup ProductGroup { get; set; }
         public Product Product { get; set; }

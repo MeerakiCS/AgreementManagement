@@ -23,7 +23,7 @@ $(document).ready(function () {
 function openAgreementModal(id) {
     debugger;
     if (id > 0) {
-        $('#agreementModal .modal-body-content').html("<div style='text-align:center;'><i class='mb-1 mt-3 spinner-border text-primary'></i><p>Please wait...</p></div>").load("/Agreement/Edit/" + id, function () {
+        $('#agreementModal .modal-body-content').html("<div style='text-align:center;'><i class='mb-1 mt-3 spinner-border text-primary'></i><p>Please wait...</p></div>").load("/Agreement/Edit?id=" + id, function () {
         })
     }
     else {
@@ -31,28 +31,31 @@ function openAgreementModal(id) {
         })
     }
 }
-
-var date = new Date();
-var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-var SelectedDate = today;
-$("#datePickerEffectiveDate").datepicker({
-    dateFormat: "mm/dd/yy",
-    showOtherMonths: true,
-    selectOtherMonths: true,
-    autoclose: true,
-    changeMonth: true,
-    changeYear: true,
-    todayHighlight: true,
-}).on("changeDate", function (newDate) {
-});
-
 function saveAgreement(id) {
-    if (id > 0) {
+    var formElements = GetFormControlData('add-update-agreement');
+    if (formElements && formElements.length > 0) {
+        ValidateForm(formElements);
+    }
+    var url = id > 0 ? "Agreement/Edit" : "Agreement/Create"
+    if (isValidate) {
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: $("#add-update-agreement").serializeToJSON(),
+            success: function (response) {
+                if (response.success) {
+                    //toastr.info(response.message, "Information!");
+                    $("#agreementModal").modal('hide');
+                    window.location.reload();
+                }
+                else {
+                    alert(response.type.toUpperCase() + ', ' + response.message);
+                }
+            }, error: function (response) {
+                alert("Something went wrong, please try again");
+            }
+        });
 
     }
-    else {
-
-    }
-
 }
 
