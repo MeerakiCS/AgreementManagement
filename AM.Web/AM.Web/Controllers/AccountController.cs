@@ -57,5 +57,12 @@ namespace AM.Web.Controllers
             ViewBag.Message = "Your username or password is incorrect.";
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
+        }
     }
 }
